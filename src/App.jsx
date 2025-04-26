@@ -8,6 +8,10 @@ import SaasAdmin from './components/saas-admin/SaasAdmin';
 import AddUser from './components/super-admin/AddUser'
 import AddStaff from './components/admin/AddStaff';
 import MeetingCreationPage from './components/super-admin/MeetingCreationPage';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import LeaveRequest from './components/staff/LeaveRequest';
+import AdminLeaveRequests from './components/admin/AdminLeaveRequests';
 
 export default function App() {
   return (
@@ -20,6 +24,10 @@ export default function App() {
       <Route path='/add-user' element={<AddUser/>}/>
       <Route path='/add-Staff' element={<AddStaff/>}/>
       <Route path='/create-meeting' element={<MeetingCreationPage/>}/>
+      <Route path="/register" element={<Register/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/leave-request" element={<LeaveRequest/>} />
+      <Route path="/admin-leave-request" element={<AdminLeaveRequests />}/>
     </Routes>
   );
 }
