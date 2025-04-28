@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './components/landing-page/LandingPage';
 import Admin from './components/admin/Admin';
 import Staff from './components/staff/Staff';
@@ -17,6 +17,12 @@ import Settings from './components/super-admin/Settings';
 import ModernEmployeeReport from './components/super-admin/EmployeeReport';
 
 export default function App() {
+  const location = useLocation();
+
+  // Routes where Nav should be hidden
+  const hideNavRoutes = ['/', '/login', '/register'];
+  const shouldShowNav = !hideNavRoutes.includes(location.pathname);
+
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
