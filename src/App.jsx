@@ -12,6 +12,9 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import LeaveRequest from './components/staff/LeaveRequest';
 import AdminLeaveRequests from './components/admin/AdminLeaveRequests';
+import MyMeeting from './components/Common1/MyMeeting';
+import Settings from './components/super-admin/Settings';
+import ModernEmployeeReport from './components/super-admin/EmployeeReport';
 
 export default function App() {
   return (
@@ -28,6 +31,9 @@ export default function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/leave-request" element={<LeaveRequest/>} />
       <Route path="/admin-leave-request" element={<AdminLeaveRequests />}/>
+      <Route path="/my-meeting" element={<MyMeeting />}/>
+      <Route path="/Settings" element={<Settings />}/>
+      <Route path="/emp-report" element={<ModernEmployeeReport />}/>
     </Routes>
   );
 }

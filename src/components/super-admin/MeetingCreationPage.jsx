@@ -105,7 +105,7 @@ export default function MeetingCreationPage() {
 
   return (
     <div className="min-h-screen container mx-auto">
-      <div className="w-[90%] mx-auto px-4 sm:px-6 mt-5">
+      <div className="w-[90%] mx-auto  mt-5">
         {/* Modern horizontal layout with header section */}
         <div className="relative overflow-hidden rounded-xl shadow-2xl">
       {/* Background image with enhanced gradient overlay */}
@@ -134,7 +134,7 @@ export default function MeetingCreationPage() {
             <p className="text-blue-100 mt-2 text-lg">Create a new meeting and invite participants</p>
             <div className="mt-6 flex space-x-3">
               <button className="px-6 py-3 bg-white text-blue-700 font-semibold rounded-lg shadow-lg hover:bg-blue-50 transition-all duration-200 transform hover:-translate-y-0.5">
-                Schedule Now
+                View Meetings
               </button>
               {/* <button className="px-6 py-3 bg-transparent border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-200">
                 Learn More
@@ -142,7 +142,7 @@ export default function MeetingCreationPage() {
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <div className="absolute -inset-4 bg-gradient-to-br from-blue-400/30 to-purple-500/30 rounded-full blur-md"></div>
             <div className="relative bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20 shadow-xl">
               <svg className="h-16 w-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +159,7 @@ export default function MeetingCreationPage() {
     </div>
         
         {/* Form in a white card */}
-        <div className="bg-white rounded-b-xl p-6">
+        <div className="bg-white rounded-b-xl py-6">
           <form onSubmit={handleSubmit}>
             {success && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
