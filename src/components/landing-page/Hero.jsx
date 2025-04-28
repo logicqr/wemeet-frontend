@@ -11,7 +11,7 @@ const Hero = () => {
   // Animate counter for "Trusted by" section
   useEffect(() => {
     if (counter < 1000) {
-      const timer = setTimeout(() => setCounter(prev => prev + 25), 20);
+      const timer = setTimeout(() => setCounter((prev) => prev + 25), 20);
       return () => clearTimeout(timer);
     }
   }, [counter]);
@@ -19,39 +19,42 @@ const Hero = () => {
   const featureData = {
     location: {
       title: 'Geolocation Tracking',
-      description: 'Record employee check-ins with precise location data to ensure accountability',
-      icon: <FiMapPin className="text-indigo-600 text-4xl mb-3" />
+      description:
+        'Record employee check-ins with precise location data to ensure accountability',
+      icon: <FiMapPin className="text-indigo-600 text-4xl mb-3" />,
     },
     attendance: {
       title: 'Smart Attendance',
-      description: 'Automate attendance tracking with biometric verification and mobile check-ins',
-      icon: <FiCheckCircle className="text-indigo-600 text-4xl mb-3" />
+      description:
+        'Automate attendance tracking with biometric verification and mobile check-ins',
+      icon: <FiCheckCircle className="text-indigo-600 text-4xl mb-3" />,
     },
     leave: {
       title: 'Leave Management',
-      description: 'Streamline leave requests, approvals, and balance tracking in one place',
-      icon: <FiCalendar className="text-indigo-600 text-4xl mb-3" />
+      description:
+        'Streamline leave requests, approvals, and balance tracking in one place',
+      icon: <FiCalendar className="text-indigo-600 text-4xl mb-3" />,
     },
     meeting: {
       title: 'Team Scheduler',
-      description: 'Coordinate meetings with built-in availability checking and calendar integration',
-      icon: <FiUsers className="text-indigo-600 text-4xl mb-3" />
-    }
+      description:
+        'Coordinate meetings with built-in availability checking and calendar integration',
+      icon: <FiUsers className="text-indigo-600 text-4xl mb-3" />,
+    },
   };
 
   const companies = [
     { name: 'ACME Inc.', logo: '🏢' },
     { name: 'TechCorp', logo: '💻' },
     { name: 'Globex', logo: '🌐' },
-    { name: 'Initech', logo: '🔧' }
+    { name: 'Initech', logo: '🔧' },
   ];
 
   return (
     <div className="relative py-20 bg-gradient-to-r from-indigo-600 to-blue-500 overflow-hidden">
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
-          <motion.div 
+          <motion.div
             className="md:w-1/2 mb-10 md:mb-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -65,37 +68,42 @@ const Hero = () => {
             >
               Workplace Management Simplified
             </motion.div>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Streamline <span className="text-yellow-300">Attendance</span> and Workforce Management
+              Streamline <span className="text-yellow-300">Attendance</span> and
+              Workforce Management
             </h1>
-            
+
             <p className="text-lg md:text-xl text-white mb-8 opacity-90">
-              All-in-one solution for attendance tracking, location monitoring, leave management, and meeting scheduling.
+              All-in-one solution for attendance tracking, location monitoring,
+              leave management, and meeting scheduling.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <motion.a 
-                href="#pricing" 
+              <motion.a
+                href="#pricing"
                 className="bg-white text-indigo-600 font-medium py-3 px-8 rounded-md hover:bg-gray-100 transition-colors text-center shadow-lg transform hover:scale-105 transition-transform duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 View Pricing
               </motion.a>
-              
-              <motion.a 
-                href="#demo" 
+
+              <motion.a
+                href="#demo"
                 className="bg-transparent border-2 border-white text-white font-medium py-3 px-8 rounded-md hover:bg-white hover:text-indigo-600 transition-colors text-center"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: 'rgba(255,255,255,0.2)',
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 Try Demo
               </motion.a>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="md:w-1/2 flex justify-center"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,46 +144,52 @@ const Hero = () => {
                   </motion.div>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {Object.keys(featureData).map((key) => (
                   <motion.div
                     key={key}
                     className="bg-indigo-50 p-4 rounded-lg flex flex-col items-center text-center cursor-pointer"
-                    whileHover={{ 
-                      scale: 1.05, 
-                      backgroundColor: "#e0e7ff" 
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: '#e0e7ff',
                     }}
                     onHoverStart={() => setIsHovering(key)}
                     onHoverEnd={() => setIsHovering(null)}
                     onClick={() => setActiveTab(key)}
                   >
-                    {React.cloneElement(featureData[key].icon, { 
-                      className: `${isHovering === key ? 'text-indigo-700' : 'text-indigo-600'} text-3xl mb-2 transition-colors` 
+                    {React.cloneElement(featureData[key].icon, {
+                      className: `${isHovering === key ? 'text-indigo-700' : 'text-indigo-600'} text-3xl mb-2 transition-colors`,
                     })}
-                    <h3 className={`font-semibold ${isHovering === key ? 'text-indigo-700' : 'text-gray-800'} transition-colors`}>
+                    <h3
+                      className={`font-semibold ${isHovering === key ? 'text-indigo-700' : 'text-gray-800'} transition-colors`}
+                    >
                       {key.charAt(0).toUpperCase() + key.slice(1)}
                     </h3>
                   </motion.div>
                 ))}
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="bg-indigo-100 p-4 rounded-lg"
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="text-center text-gray-800 mb-3 font-semibold">
-                  Trusted by over <span className="text-indigo-600 font-bold">{counter}+</span> companies
+                  Trusted by over{' '}
+                  <span className="text-indigo-600 font-bold">{counter}+</span>{' '}
+                  companies
                 </div>
                 <div className="flex justify-around items-center">
                   {companies.map((company, index) => (
-                    <motion.div 
+                    <motion.div
                       key={index}
                       className="flex flex-col items-center"
                       whileHover={{ y: -3 }}
                     >
                       <span className="text-2xl mb-1">{company.logo}</span>
-                      <div className="text-gray-600 text-xs font-medium">{company.name}</div>
+                      <div className="text-gray-600 text-xs font-medium">
+                        {company.name}
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -184,7 +198,7 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Wave shape divider */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden">
         <svg
