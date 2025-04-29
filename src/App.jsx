@@ -11,11 +11,12 @@ import MeetingCreationPage from './components/super-admin/MeetingCreationPage';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import LeaveRequest from './components/staff/LeaveRequest';
-import AdminLeaveRequests from './components/admin/AdminLeaveRequests';
+import AdminLeaveRequests from './components/commonSections/AdminLeaveRequests'
 import MyMeeting from './components/Common1/MyMeeting';
 import Settings from './components/super-admin/Settings';
 import ModernEmployeeReport from './components/super-admin/EmployeeReport';
-
+import Nav from './components/commonSections/Nav';
+import AttendancePanel from './components/commonSections/AttendancePanel'
 export default function App() {
   const location = useLocation();
 
@@ -24,6 +25,8 @@ export default function App() {
   const shouldShowNav = !hideNavRoutes.includes(location.pathname);
 
   return (
+   <>
+    {shouldShowNav && <Nav/>}
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/admin" element={<Admin />} />
@@ -32,14 +35,18 @@ export default function App() {
       <Route path="/super-admin" element={<SuperAdmin />} />
       <Route path='/add-user' element={<AddUser/>}/>
       <Route path='/add-Staff' element={<AddStaff/>}/>
-      <Route path='/create-meeting' element={<MeetingCreationPage/>}/>
+      <Route path='/create-meetings' element={<MeetingCreationPage/>}/>
       <Route path="/register" element={<Register/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/leave-request" element={<LeaveRequest/>} />
       <Route path="/admin-leave-request" element={<AdminLeaveRequests />}/>
-      <Route path="/my-meeting" element={<MyMeeting />}/>
+      <Route path="/my-meetings" element={<MyMeeting />}/>
       <Route path="/Settings" element={<Settings />}/>
-      <Route path="/emp-report" element={<ModernEmployeeReport />}/>
+      <Route path="/employee-reports" element={<ModernEmployeeReport />}/>
+      <Route path="/my-leave" element={<LeaveRequest />} />
+      <Route path="/leave-management" element={<AdminLeaveRequests />} />
+      <Route path="/my-attendance" element={<AttendancePanel />} />
     </Routes>
+   </>
   );
 }

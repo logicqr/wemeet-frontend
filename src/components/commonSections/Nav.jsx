@@ -21,7 +21,7 @@ function Nav() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   // Use this to set the role from your authentication system
-  const [role, setRole] = useState('staff');
+  const [role, setRole] = useState('super-admin');
   const [employeeData, setEmployeeData] = useState('John Doe');
 
   const location = useLocation();
@@ -92,7 +92,7 @@ function Nav() {
       },
       {
         name: 'Employees',
-        path: '/employees-details',
+        path: '/emp-repo',
         icon: <MdPeopleOutline className="text-lg" />,
       },
       {
@@ -124,11 +124,7 @@ function Nav() {
         path: '/leave-management',
         icon: <FaRegCalendarAlt className="text-lg" />,
       },
-      {
-        name: 'Employees',
-        path: '/employees-details',
-        icon: <MdPeopleOutline className="text-lg" />,
-      },
+      
       {
         name: 'Create Meetings',
         path: '/create-meetings',
@@ -141,7 +137,7 @@ function Nav() {
       },
       {
         name: 'Reports',
-        path: '/reports',
+        path: '/employee-reports',
         icon: <HiOutlineDocumentReport className="text-lg" />,
       },
     ];

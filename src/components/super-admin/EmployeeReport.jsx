@@ -108,6 +108,7 @@ export default function ModernEmployeeReport() {
 
     setLoading(true);
     setError('');
+    console.log(selectedUser)
 
     try {
       const response = await axios.get(`https://wemeet-backend-latest.onrender.com/api/user-report/${userId}`, {

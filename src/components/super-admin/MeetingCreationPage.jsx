@@ -16,8 +16,8 @@ export default function MeetingCreationPage() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   
   // Company ID would typically come from auth context or similar
-  const company_id = "cm9vb0w9k0000tz6sgvmihnw9"
-  const currentUserId= "42ddbf40-32f0-4e90-9957-56bf33b2a0e7"
+  const company_id = "cm9yglvn40000dg2ovt5v0rrq"
+  const currentUserId= "17319b75-0f8e-4d50-8b05-e845069f4c75"
 
   useEffect(() => {
     fetchUsers();
