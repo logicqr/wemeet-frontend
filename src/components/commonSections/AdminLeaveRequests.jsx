@@ -531,13 +531,14 @@ export default function AdminLeaveRequests() {
                       {request.status === 'PENDING' && (
                         <div className="mt-3 sm:mt-0 flex justify-end space-x-2 sm:space-x-3">
                           <button
-                           disabled={processing.id === request.leave_id}
+                            disabled={processing.id === request.leave_id}
                             onClick={() =>
                               updateLeaveStatus(request.leave_id, 'REJECTED')
                             }
                             className="inline-flex items-center px-2 py-1 sm:px-2.5 sm:py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
                           >
-                            {processing.id === request.leave_id && processing.action === 'REJECTED' ? (
+                            {processing.id === request.leave_id &&
+                            processing.action === 'REJECTED' ? (
                               <>
                                 <svg
                                   className="animate-spin -ml-0.5 mr-1.5 h-3 w-3"
@@ -575,7 +576,8 @@ export default function AdminLeaveRequests() {
                             }
                             className="inline-flex items-center px-2 py-1 sm:px-2.5 sm:py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                           >
-                            {processing.id === request.leave_id && processing.action === 'APPROVED' ? (
+                            {processing.id === request.leave_id &&
+                            processing.action === 'APPROVED' ? (
                               <>
                                 <svg
                                   className="animate-spin -ml-0.5 mr-1.5 h-3 w-3"
@@ -608,7 +610,6 @@ export default function AdminLeaveRequests() {
                           </button>
                         </div>
                       )}
-
                     </div>
                   </div>
                 </div>
