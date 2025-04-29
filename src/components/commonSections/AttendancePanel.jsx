@@ -19,7 +19,7 @@ const AttendancePanel = () => {
   const [message, setMessage] = useState('');
   const [elapsedTime, setElapsedTime] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
-  const user_id = '793e7fd2-8586-4677-9dda-f08b9d188ca9';
+  const user_id = 'ad2b1a16-6720-45d9-87a8-a2e8a4d7bfb2';
 
   // Format elapsed time as HH:MM:SS
   const formatTime = (seconds) => {
@@ -123,7 +123,7 @@ const AttendancePanel = () => {
     setActionLoading(true);
     try {
       await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/attendance/check-in',
+        'https://wemeet-backend-latest.onrender.com/api/check-in',
         {
           user_id,
           latitude: location.latitude,

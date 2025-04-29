@@ -523,6 +523,7 @@ export default function ModernEmployeeReport() {
           {!report ? (
             <>
               {/* Search and filter */}
+
               <div className="flex flex-col md:flex-row justify-between mb-4 md:mb-6 space-y-3 md:space-y-0">
                 <div className="relative w-full md:w-64">
                   <input
@@ -648,6 +649,8 @@ export default function ModernEmployeeReport() {
                           <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Actions
                           </th>
+                          
+                          
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -685,7 +688,7 @@ export default function ModernEmployeeReport() {
                               <td className="px-4 py-3 whitespace-nowrap hidden lg:table-cell">
                                 <p className="text-sm text-gray-500">{user.email || 'N/A'}</p>
                               </td>
-                              <td className="px-4 py-3 whitespace-nowrap text-right">
+                              <td className="px-4 py-3 whitespace-nowrap ">
                                 <button
                                   onClick={() => fetchReport(user.user_id)}
                                   className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
