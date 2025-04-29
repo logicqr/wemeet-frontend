@@ -5,11 +5,11 @@ export default function AdminLeaveRequests() {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [processingId, setProcessingId] = useState(null);
+  const [processing, setProcessing] = useState({ id: null, action: null });
   const [activeTab, setActiveTab] = useState('ALL');
 
   // Admin ID - in production this would come from authentication context
-  const ADMIN_ID = 'd0dca25f-15f8-4f4d-b1eb-3dd80a1f15c3';
+  const ADMIN_ID = '265116e9-0546-425b-bc9b-3cf69a7e47fb';
   const ROLE = 'admin';
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function AdminLeaveRequests() {
   };
 
   const updateLeaveStatus = async (leaveId, status) => {
-    setProcessingId(leaveId);
+    setProcessing({ id: leaveId, action: status });
     try {
       await axios.post(
         'https://wemeet-backend-latest.onrender.com/api/leave-request/update-status',
@@ -62,7 +62,7 @@ export default function AdminLeaveRequests() {
         `Failed to ${status.toLowerCase()} the request. Please try again.`
       );
     } finally {
-      setProcessingId(null);
+      setProcessing({ id: null, action: null });
     }
   };
 
@@ -531,13 +531,13 @@ export default function AdminLeaveRequests() {
                       {request.status === 'PENDING' && (
                         <div className="mt-3 sm:mt-0 flex justify-end space-x-2 sm:space-x-3">
                           <button
-                            disabled={processingId === request.leave_id}
+                           disabled={processing.id === request.leave_id}
                             onClick={() =>
                               updateLeaveStatus(request.leave_id, 'REJECTED')
                             }
                             className="inline-flex items-center px-2 py-1 sm:px-2.5 sm:py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
                           >
-                            {processingId === request.leave_id ? (
+                            {processing.id === request.leave_id && processing.action === 'REJECTED' ? (
                               <>
                                 <svg
                                   className="animate-spin -ml-0.5 mr-1.5 h-3 w-3"
@@ -569,13 +569,13 @@ export default function AdminLeaveRequests() {
                             )}
                           </button>
                           <button
-                            disabled={processingId === request.leave_id}
+                            disabled={processing.id === request.leave_id}
                             onClick={() =>
                               updateLeaveStatus(request.leave_id, 'APPROVED')
                             }
                             className="inline-flex items-center px-2 py-1 sm:px-2.5 sm:py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                           >
-                            {processingId === request.leave_id ? (
+                            {processing.id === request.leave_id && processing.action === 'APPROVED' ? (
                               <>
                                 <svg
                                   className="animate-spin -ml-0.5 mr-1.5 h-3 w-3"
@@ -608,6 +608,7 @@ export default function AdminLeaveRequests() {
                           </button>
                         </div>
                       )}
+
                     </div>
                   </div>
                 </div>

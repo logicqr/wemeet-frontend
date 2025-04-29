@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default function LeaveRequest() {
   // Constants
-  const USER_ID = '793e7fd2-8586-4677-9dda-f08b9d188ca9';
+  const USER_ID = 'ad2b1a16-6720-45d9-87a8-a2e8a4d7bfb2';
   const today = new Date().toISOString().split('T')[0];
 
   // State management
@@ -165,7 +165,7 @@ export default function LeaveRequest() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="container mx-auto px-4 py-6 lg:py-8 xl:py-10">
+      <div className="container max-w-5xl md:w-5xl mx-auto px-4 py-6 lg:py-8 xl:py-10">
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-4">

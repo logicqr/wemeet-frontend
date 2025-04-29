@@ -8,9 +8,9 @@ import SaasAdmin from './components/saas-admin/SaasAdmin';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import LeaveRequest from './components/staff/LeaveRequest';
-import AdminLeaveRequests from './components/common/AdminLeaveRequests';
-import Nav from './components/common/Nav';
-import AttendancePanel from './components/common/AttendancePanel';
+import AdminLeaveRequests from './components/commonSections/AdminLeaveRequests';
+import Nav from './components/commonSections/Nav';
+import AttendancePanel from './components/commonSections/AttendancePanel';
 
 export default function App() {
   const location = useLocation();

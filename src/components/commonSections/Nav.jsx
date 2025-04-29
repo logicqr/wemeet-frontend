@@ -21,7 +21,7 @@ function Nav() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   // Use this to set the role from your authentication system
-  const [role, setRole] = useState('staff');
+  const [role, setRole] = useState('admin');
   const [employeeData, setEmployeeData] = useState('John Doe');
 
   const location = useLocation();
