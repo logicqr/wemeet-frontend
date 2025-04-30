@@ -23,7 +23,6 @@ function Nav() {
   // Use this to set the role from your authentication system
   const [role, setRole] = useState('admin');
   const [employeeData, setEmployeeData] = useState('John Doe');
-
   const location = useLocation();
   const navigate = useNavigate();
   const id = sessionStorage.getItem('id');
@@ -92,7 +91,7 @@ function Nav() {
       },
       {
         name: 'Employees',
-        path: '/employees-details',
+        path: '/emp-repo',
         icon: <MdPeopleOutline className="text-lg" />,
       },
       {
@@ -124,11 +123,7 @@ function Nav() {
         path: '/leave-management',
         icon: <FaRegCalendarAlt className="text-lg" />,
       },
-      {
-        name: 'Employees',
-        path: '/employees-details',
-        icon: <MdPeopleOutline className="text-lg" />,
-      },
+      
       {
         name: 'Create Meetings',
         path: '/create-meetings',
@@ -141,7 +136,7 @@ function Nav() {
       },
       {
         name: 'Reports',
-        path: '/reports',
+        path: '/employee-reports',
         icon: <HiOutlineDocumentReport className="text-lg" />,
       },
     ];
