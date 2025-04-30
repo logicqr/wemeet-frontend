@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {FaCalendarAlt,FaFilter,FaChevronDown,FaSearch,FaTimes,FaDownload,FaArrowLeft,FaEye,FaCloudDownloadAlt} from 'react-icons/fa';
+import {
+  FaCalendarAlt,
+  FaFilter,
+  FaChevronDown,
+  FaSearch,
+  FaTimes,
+  FaDownload,
+  FaArrowLeft,
+  FaEye,
+  FaCloudDownloadAlt,
+} from 'react-icons/fa';
 
 export default function ModernEmployeeReport() {
   const [users, setUsers] = useState([]);
@@ -27,19 +37,23 @@ export default function ModernEmployeeReport() {
   const [selectedStaff, setSelectedStaff] = useState([]);
   const [showBulkExportModal, setShowBulkExportModal] = useState(false);
 
-  const companyId = "cm9yglvn40000dg2ovt5v0rrq";
+  const companyId = 'cm9yglvn40000dg2ovt5v0rrq';
 
   // Fetch all users when component mounts
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         setFetchingUsers(true);
-        const response = await axios.post('https://wemeet-backend-latest.onrender.com/api/all-users', { company_id: companyId });
+        const response = await axios.post(
+          'https://wemeet-backend-latest.onrender.com/api/all-users',
+          { company_id: companyId }
+        );
         setUsers(response.data);
         setFilteredUsers(response.data);
-
       } catch (err) {
-        setError(`Error loading users: ${err.response?.data?.error || err.message}`);
+        setError(
+          `Error loading users: ${err.response?.data?.error || err.message}`
+        );
       } finally {
         setFetchingUsers(false);
       }
@@ -53,10 +67,11 @@ export default function ModernEmployeeReport() {
     if (searchQuery.trim() === '') {
       setFilteredUsers(users);
     } else {
-      const filtered = users.filter(user =>
-        user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.department?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.position?.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = users.filter(
+        (user) =>
+          user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.department?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.position?.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredUsers(filtered);
     }
@@ -73,7 +88,9 @@ export default function ModernEmployeeReport() {
   // Handle select all toggle
   useEffect(() => {
     if (selectAll && report?.attendance) {
-      setSelectedRecords(report.attendance.map(record => record.attendance_id));
+      setSelectedRecords(
+        report.attendance.map((record) => record.attendance_id)
+      );
     } else if (!selectAll) {
       setSelectedRecords([]);
     }
@@ -82,7 +99,7 @@ export default function ModernEmployeeReport() {
   // Handle staff selection
   const toggleStaffSelection = (userId) => {
     if (selectedStaff.includes(userId)) {
-      setSelectedStaff(selectedStaff.filter(id => id !== userId));
+      setSelectedStaff(selectedStaff.filter((id) => id !== userId));
     } else {
       setSelectedStaff([...selectedStaff, userId]);
     }
@@ -95,7 +112,7 @@ export default function ModernEmployeeReport() {
       setSelectedStaff([]);
     } else {
       // Otherwise select all
-      setSelectedStaff(filteredUsers.map(user => user.user_id));
+      setSelectedStaff(filteredUsers.map((user) => user.user_id));
     }
   };
 
@@ -108,18 +125,21 @@ export default function ModernEmployeeReport() {
 
     setLoading(true);
     setError('');
-    console.log(selectedUser)
+    console.log(selectedUser);
 
     try {
-      const response = await axios.get(`https://wemeet-backend-latest.onrender.com/api/user-report/${userId}`, {
-        params: { startDate, endDate }
-      });
+      const response = await axios.get(
+        `https://wemeet-backend-latest.onrender.com/api/user-report/${userId}`,
+        {
+          params: { startDate, endDate },
+        }
+      );
       setReport(response.data);
       setSelectedUser(userId);
-
-
     } catch (err) {
-      setError(`Error loading report: ${err.response?.data?.error || err.message}`);
+      setError(
+        `Error loading report: ${err.response?.data?.error || err.message}`
+      );
     } finally {
       setLoading(false);
     }
@@ -127,17 +147,23 @@ export default function ModernEmployeeReport() {
 
   // Export functions
   const exportToPDF = () => {
-    alert(`Exporting PDF data from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)}`);
+    alert(
+      `Exporting PDF data from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)}`
+    );
     setShowExportModal(false);
   };
 
   const exportToExcel = () => {
-    alert(`Exporting Excel data from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)}`);
+    alert(
+      `Exporting Excel data from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)}`
+    );
     setShowExportModal(false);
   };
 
   const bulkExport = () => {
-    alert(`Exporting data for ${selectedStaff.length} staff members from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)} in ${exportFormat} format`);
+    alert(
+      `Exporting data for ${selectedStaff.length} staff members from ${formatDate(exportStartDate)} to ${formatDate(exportEndDate)} in ${exportFormat} format`
+    );
     setShowBulkExportModal(false);
   };
 
@@ -160,7 +186,7 @@ export default function ModernEmployeeReport() {
 
   const handleRecordSelection = (id) => {
     if (selectedRecords.includes(id)) {
-      setSelectedRecords(selectedRecords.filter(recordId => recordId !== id));
+      setSelectedRecords(selectedRecords.filter((recordId) => recordId !== id));
     } else {
       setSelectedRecords([...selectedRecords, id]);
     }
@@ -194,9 +220,14 @@ export default function ModernEmployeeReport() {
   function calculateTotalHours() {
     if (!report?.attendance || report.attendance.length === 0) return 0;
 
-    return report.attendance.reduce((total, record) => {
-      return total + parseFloat(calculateHoursWorked(record.checkIn, record.checkOut));
-    }, 0).toFixed(2);
+    return report.attendance
+      .reduce((total, record) => {
+        return (
+          total +
+          parseFloat(calculateHoursWorked(record.checkIn, record.checkOut))
+        );
+      }, 0)
+      .toFixed(2);
   }
 
   function formatDate(dateString) {
@@ -204,7 +235,7 @@ export default function ModernEmployeeReport() {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   }
 
@@ -230,7 +261,9 @@ export default function ModernEmployeeReport() {
         <h3 className="text-lg font-semibold mb-4">Export Report</h3>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Start Date
+            </label>
             <div className="relative">
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
@@ -242,7 +275,9 @@ export default function ModernEmployeeReport() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              End Date
+            </label>
             <div className="relative">
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
@@ -254,7 +289,9 @@ export default function ModernEmployeeReport() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Export Format</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Export Format
+            </label>
             <div className="flex space-x-4">
               <label className="inline-flex items-center">
                 <input
@@ -309,7 +346,9 @@ export default function ModernEmployeeReport() {
         </p>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Start Date
+            </label>
             <div className="relative">
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
@@ -321,7 +360,9 @@ export default function ModernEmployeeReport() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              End Date
+            </label>
             <div className="relative">
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
@@ -333,7 +374,9 @@ export default function ModernEmployeeReport() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Export Format</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Export Format
+            </label>
             <div className="flex space-x-4">
               <label className="inline-flex items-center">
                 <input
@@ -360,7 +403,9 @@ export default function ModernEmployeeReport() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Export Content</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Export Content
+            </label>
             <div className="flex space-x-4">
               <label className="inline-flex items-center">
                 <input
@@ -421,34 +466,57 @@ export default function ModernEmployeeReport() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
               <p className="text-sm font-medium text-gray-500">Date</p>
-              <p className="text-gray-900 font-medium">{formatDate(currentRecord.date)}</p>
+              <p className="text-gray-900 font-medium">
+                {formatDate(currentRecord.date)}
+              </p>
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">Status</p>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                ${currentRecord.status === 'PRESENT' ? 'bg-green-100 text-green-800' :
-                  currentRecord.status === 'LATE' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
+              <span
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                ${
+                  currentRecord.status === 'PRESENT'
+                    ? 'bg-green-100 text-green-800'
+                    : currentRecord.status === 'LATE'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-red-100 text-red-800'
+                }`}
+              >
                 {currentRecord.status}
               </span>
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">Check In Time</p>
-              <p className="text-gray-900">{formatDateTime(currentRecord.checkIn)}</p>
+              <p className="text-gray-900">
+                {formatDateTime(currentRecord.checkIn)}
+              </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">Check Out Time</p>
-              <p className="text-gray-900">{formatDateTime(currentRecord.checkOut)}</p>
+              <p className="text-sm font-medium text-gray-500">
+                Check Out Time
+              </p>
+              <p className="text-gray-900">
+                {formatDateTime(currentRecord.checkOut)}
+              </p>
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">Hours Worked</p>
-              <p className="text-gray-900">{calculateHoursWorked(currentRecord.checkIn, currentRecord.checkOut)} hrs</p>
+              <p className="text-gray-900">
+                {calculateHoursWorked(
+                  currentRecord.checkIn,
+                  currentRecord.checkOut
+                )}{' '}
+                hrs
+              </p>
             </div>
           </div>
 
           <div className="mb-6">
             <p className="text-sm font-medium text-gray-500 mb-2">Report</p>
             <div className="bg-gray-50 p-4 rounded-md">
-              <p className="text-gray-900">{currentRecord.report || "No report submitted"}</p>
+              <p className="text-gray-900">
+                {currentRecord.report || 'No report submitted'}
+              </p>
             </div>
           </div>
 
@@ -478,7 +546,9 @@ export default function ModernEmployeeReport() {
       <div className="flex-1 overflow-auto">
         <header className="bg-white p-4 shadow">
           <div className="flex flex-col sm:flex-row justify-between items-center">
-            <h1 className="text-2xl font-semibold mb-2 sm:mb-0">Staff Attendance Reports</h1>
+            <h1 className="text-2xl font-semibold mb-2 sm:mb-0">
+              Staff Attendance Reports
+            </h1>
             {report ? (
               <div className="flex flex-wrap gap-2">
                 <button
@@ -533,7 +603,10 @@ export default function ModernEmployeeReport() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <FaSearch className="absolute left-3 top-2.5 text-gray-400" size={18} />
+                  <FaSearch
+                    className="absolute left-3 top-2.5 text-gray-400"
+                    size={18}
+                  />
                   {searchQuery && (
                     <button
                       onClick={() => setSearchQuery('')}
@@ -557,12 +630,14 @@ export default function ModernEmployeeReport() {
                   </button>
                 </div>
               </div>
-{showFilters && (
+              {showFilters && (
                 <div className="mb-6 p-4 bg-white rounded-lg shadow animate-fadeIn">
                   <h3 className="font-medium mb-4">Date Filters</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Start Date
+                      </label>
                       <div className="relative">
                         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                         <input
@@ -574,7 +649,9 @@ export default function ModernEmployeeReport() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        End Date
+                      </label>
                       <div className="relative">
                         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                         <input
@@ -606,16 +683,24 @@ export default function ModernEmployeeReport() {
               {/* Staff List */}
               <div className="bg-white rounded-lg shadow overflow-hidden">
                 <div className="border-b border-gray-200 bg-gray-50 px-4 py-3 flex justify-between items-center">
-                  <h2 className="text-lg font-medium text-gray-900">Staff Directory</h2>
+                  <h2 className="text-lg font-medium text-gray-900">
+                    Staff Directory
+                  </h2>
                   <div className="flex items-center">
                     <input
                       id="select-all-staff"
                       type="checkbox"
                       className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 mr-2"
-                      checked={selectedStaff.length === filteredUsers.length && filteredUsers.length > 0}
+                      checked={
+                        selectedStaff.length === filteredUsers.length &&
+                        filteredUsers.length > 0
+                      }
                       onChange={toggleSelectAllStaff}
                     />
-                    <label htmlFor="select-all-staff" className="text-sm text-gray-700">
+                    <label
+                      htmlFor="select-all-staff"
+                      className="text-sm text-gray-700"
+                    >
                       Select All
                     </label>
                   </div>
@@ -649,23 +734,26 @@ export default function ModernEmployeeReport() {
                           <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Actions
                           </th>
-                          
-                          
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
                         {filteredUsers.length > 0 ? (
-                          filteredUsers.map(user => (
+                          filteredUsers.map((user) => (
                             <tr
                               key={user.user_id}
-                              className={`hover:bg-blue-50 ${selectedUser === user.user_id ? 'bg-blue-50' : ''} ${selectedStaff.includes(user.user_id) ? 'bg-blue-50' : ''
-                                }`}
+                              className={`hover:bg-blue-50 ${selectedUser === user.user_id ? 'bg-blue-50' : ''} ${
+                                selectedStaff.includes(user.user_id)
+                                  ? 'bg-blue-50'
+                                  : ''
+                              }`}
                             >
                               <td className="px-2 py-3 whitespace-nowrap">
                                 <input
                                   type="checkbox"
                                   checked={selectedStaff.includes(user.user_id)}
-                                  onChange={() => toggleStaffSelection(user.user_id)}
+                                  onChange={() =>
+                                    toggleStaffSelection(user.user_id)
+                                  }
                                   className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                 />
                               </td>
@@ -675,18 +763,26 @@ export default function ModernEmployeeReport() {
                                     {user.userName.charAt(0).toUpperCase()}
                                   </div>
                                   <div className="ml-3">
-                                    <p className="text-sm font-medium text-gray-900">{user.userName}</p>
+                                    <p className="text-sm font-medium text-gray-900">
+                                      {user.userName}
+                                    </p>
                                   </div>
                                 </div>
                               </td>
                               <td className="px-4 py-3 whitespace-nowrap">
-                                <p className="text-sm text-gray-900">{user.position || 'N/A'}</p>
+                                <p className="text-sm text-gray-900">
+                                  {user.position || 'N/A'}
+                                </p>
                               </td>
                               <td className="px-4 py-3 whitespace-nowrap hidden md:table-cell">
-                                <p className="text-sm text-gray-900">{user.department || 'N/A'}</p>
+                                <p className="text-sm text-gray-900">
+                                  {user.department || 'N/A'}
+                                </p>
                               </td>
                               <td className="px-4 py-3 whitespace-nowrap hidden lg:table-cell">
-                                <p className="text-sm text-gray-500">{user.email || 'N/A'}</p>
+                                <p className="text-sm text-gray-500">
+                                  {user.email || 'N/A'}
+                                </p>
                               </td>
                               <td className="px-4 py-3 whitespace-nowrap ">
                                 <button
@@ -701,7 +797,9 @@ export default function ModernEmployeeReport() {
                         ) : (
                           <tr>
                             <td colSpan="6" className="px-6 py-8 text-center">
-                              <p className="text-gray-500 text-sm">No staff members found</p>
+                              <p className="text-gray-500 text-sm">
+                                No staff members found
+                              </p>
                               {searchQuery && (
                                 <button
                                   className="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -732,7 +830,9 @@ export default function ModernEmployeeReport() {
                     Back to staff list
                   </button>
                   <h2 className="text-xl font-bold text-gray-900">
-                    {users.find(user => user.user_id === selectedUser)?.userName || 'Staff Member'}'s Report
+                    {users.find((user) => user.user_id === selectedUser)
+                      ?.userName || 'Staff Member'}
+                    's Report
                   </h2>
                   <p className="mt-1 text-sm text-gray-500">
                     {formatDate(startDate)} - {formatDate(endDate)}
@@ -754,7 +854,9 @@ export default function ModernEmployeeReport() {
                 <div className="p-4 border-b border-gray-200 bg-gray-50 animate-fadeIn">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Start Date
+                      </label>
                       <div className="relative">
                         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                         <input
@@ -766,7 +868,9 @@ export default function ModernEmployeeReport() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        End Date
+                      </label>
                       <div className="relative">
                         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                         <input
@@ -809,10 +913,11 @@ export default function ModernEmployeeReport() {
                   <div className="border-b border-gray-200">
                     <nav className="flex -mb-px">
                       <button
-                        className={`px-4 py-2 border-b-2 text-sm font-medium ${activeTab === 'attendance'
-                          ? 'border-blue-500 text-blue-600'
-                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                          }`}
+                        className={`px-4 py-2 border-b-2 text-sm font-medium ${
+                          activeTab === 'attendance'
+                            ? 'border-blue-500 text-blue-600'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
                         onClick={() => setActiveTab('attendance')}
                       >
                         <div className="flex items-center">
@@ -820,8 +925,6 @@ export default function ModernEmployeeReport() {
                           Attendance Records
                         </div>
                       </button>
-
-
                     </nav>
                   </div>
 
@@ -830,7 +933,9 @@ export default function ModernEmployeeReport() {
                     {activeTab === 'attendance' && (
                       <>
                         <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-lg font-medium">Attendance Records</h3>
+                          <h3 className="text-lg font-medium">
+                            Attendance Records
+                          </h3>
                           <div>
                             <label className="inline-flex items-center">
                               <input
@@ -839,7 +944,9 @@ export default function ModernEmployeeReport() {
                                 onChange={() => setSelectAll(!selectAll)}
                                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
-                              <span className="ml-2 text-sm text-gray-700">Select All</span>
+                              <span className="ml-2 text-sm text-gray-700">
+                                Select All
+                              </span>
                             </label>
                           </div>
                         </div>
@@ -871,14 +978,24 @@ export default function ModernEmployeeReport() {
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                              {report?.attendance && report.attendance.length > 0 ? (
+                              {report?.attendance &&
+                              report.attendance.length > 0 ? (
                                 report.attendance.map((record) => (
-                                  <tr key={record.attendance_id} className="hover:bg-gray-50">
+                                  <tr
+                                    key={record.attendance_id}
+                                    className="hover:bg-gray-50"
+                                  >
                                     <td className="px-2 py-4 whitespace-nowrap">
                                       <input
                                         type="checkbox"
-                                        checked={selectedRecords.includes(record.attendance_id)}
-                                        onChange={() => handleRecordSelection(record.attendance_id)}
+                                        checked={selectedRecords.includes(
+                                          record.attendance_id
+                                        )}
+                                        onChange={() =>
+                                          handleRecordSelection(
+                                            record.attendance_id
+                                          )
+                                        }
                                         className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                       />
                                     </td>
@@ -888,9 +1005,16 @@ export default function ModernEmployeeReport() {
                                       </span>
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
-                                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                        ${record.status === 'PRESENT' ? 'bg-green-100 text-green-800' :
-                                          record.status === 'LATE' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
+                                      <span
+                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                        ${
+                                          record.status === 'PRESENT'
+                                            ? 'bg-green-100 text-green-800'
+                                            : record.status === 'LATE'
+                                              ? 'bg-yellow-100 text-yellow-800'
+                                              : 'bg-red-100 text-red-800'
+                                        }`}
+                                      >
                                         {record.status}
                                       </span>
                                     </td>
@@ -906,7 +1030,11 @@ export default function ModernEmployeeReport() {
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
                                       <div className="text-sm text-gray-900">
-                                        {calculateHoursWorked(record.checkIn, record.checkOut)} hrs
+                                        {calculateHoursWorked(
+                                          record.checkIn,
+                                          record.checkOut
+                                        )}{' '}
+                                        hrs
                                       </div>
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -927,8 +1055,14 @@ export default function ModernEmployeeReport() {
                                 ))
                               ) : (
                                 <tr>
-                                  <td colSpan="7" className="px-6 py-8 text-center">
-                                    <p className="text-gray-500">No attendance records found for the selected date range</p>
+                                  <td
+                                    colSpan="7"
+                                    className="px-6 py-8 text-center"
+                                  >
+                                    <p className="text-gray-500">
+                                      No attendance records found for the
+                                      selected date range
+                                    </p>
                                   </td>
                                 </tr>
                               )}
@@ -937,7 +1071,7 @@ export default function ModernEmployeeReport() {
                         </div>
                       </>
                     )}
-                 </div>
+                  </div>
                 </>
               )}
             </div>

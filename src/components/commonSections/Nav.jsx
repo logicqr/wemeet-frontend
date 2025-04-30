@@ -123,7 +123,7 @@ function Nav() {
         path: '/leave-management',
         icon: <FaRegCalendarAlt className="text-lg" />,
       },
-      
+
       {
         name: 'Create Meetings',
         path: '/create-meetings',

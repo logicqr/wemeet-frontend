@@ -5,7 +5,7 @@ import Admin from './components/admin/Admin';
 import Staff from './components/staff/Staff';
 import SuperAdmin from './components/super-admin/SuperAdmin';
 import SaasAdmin from './components/saas-admin/SaasAdmin';
-import AddUser from './components/super-admin/AddUser'
+import AddUser from './components/super-admin/AddUser';
 import AddStaff from './components/admin/AddStaff';
 import MeetingCreationPage from './components/super-admin/MeetingCreationPage';
 import Register from './components/auth/Register';
@@ -26,28 +26,28 @@ export default function App() {
   const shouldShowNav = !hideNavRoutes.includes(location.pathname);
 
   return (
-   <>
-    {shouldShowNav && <Nav/>}
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/staff" element={<Staff />} />
-      <Route path="/saas-admin" element={<SaasAdmin />} />
-      <Route path="/super-admin" element={<SuperAdmin />} />
-      <Route path='/add-user' element={<AddUser/>}/>
-      <Route path='/add-Staff' element={<AddStaff/>}/>
-      <Route path='/create-meetings' element={<MeetingCreationPage/>}/>
-      <Route path="/register" element={<Register/>} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/leave-request" element={<LeaveRequest/>} />
-      <Route path="/admin-leave-request" element={<AdminLeaveRequests />}/>
-      <Route path="/my-meetings" element={<MyMeeting />}/>
-      <Route path="/Settings" element={<Settings />}/>
-      <Route path="/reports" element={<ModernEmployeeReport />}/>
-      <Route path="/my-leave" element={<LeaveRequest />} />
-      <Route path="/leave-management" element={<AdminLeaveRequests/> } />
-      <Route path="/my-attendance" element={<AttendancePanel />} />
-    </Routes>
-   </>
+    <>
+      {shouldShowNav && <Nav />}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/staff" element={<Staff />} />
+        <Route path="/saas-admin" element={<SaasAdmin />} />
+        <Route path="/super-admin" element={<SuperAdmin />} />
+        <Route path="/add-user" element={<AddUser />} />
+        <Route path="/add-Staff" element={<AddStaff />} />
+        <Route path="/create-meetings" element={<MeetingCreationPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/leave-request" element={<LeaveRequest />} />
+        <Route path="/admin-leave-request" element={<AdminLeaveRequests />} />
+        <Route path="/my-meetings" element={<MyMeeting />} />
+        <Route path="/Settings" element={<Settings />} />
+        <Route path="/reports" element={<ModernEmployeeReport />} />
+        <Route path="/my-leave" element={<LeaveRequest />} />
+        <Route path="/leave-management" element={<AdminLeaveRequests />} />
+        <Route path="/my-attendance" element={<AttendancePanel />} />
+      </Routes>
+    </>
   );
 }
