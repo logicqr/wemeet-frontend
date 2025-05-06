@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../auth/AxiosInstance';
 
 export default function AdminLeaveRequests() {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -19,8 +19,8 @@ export default function AdminLeaveRequests() {
   const fetchLeaveRequests = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `https://wemeet-backend-latest.onrender.com/api/${ROLE}-leave-request`
+      const response = await axiosInstance.get(
+        `/${ROLE}-leave-request`
       );
       if (response.data && response.data.LeaveRequests) {
         setLeaveRequests(response.data.LeaveRequests || []);
@@ -39,8 +39,8 @@ export default function AdminLeaveRequests() {
   const updateLeaveStatus = async (leaveId, status) => {
     setProcessing({ id: leaveId, action: status });
     try {
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/leave-request/update-status',
+      await axiosInstance.post(
+        '/leave-request/update-status',
         {
           leave_id: leaveId,
           status: status,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from './AxiosInstance';
 
 export default function Login() {
   const initialFormState = {
@@ -49,7 +49,7 @@ export default function Login() {
       };
 
       // Make API call
-      await axios.post('/api/login', loginData);
+      await axiosInstance.post('/login', loginData);
 
       setSuccess('Login successful! Redirecting...');
 

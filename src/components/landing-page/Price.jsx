@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { FaCheckCircle } from 'react-icons/fa';
+import axiosInstance from '../auth/AxiosInstance';
 
 export default function Price() {
   const [plans, setPlans] = useState([]);
@@ -14,8 +14,8 @@ export default function Price() {
   const fetchPlans = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        'https://wemeet-backend-latest.onrender.com/api/plans'
+      const response = await axiosInstance.get(
+        '/plans'
       );
       if (response.data && response.data.data) {
         setPlans(response.data.data);

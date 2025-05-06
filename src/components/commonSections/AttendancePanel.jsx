@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   FaClock,
   FaMapMarkerAlt,
@@ -10,12 +9,11 @@ import {
   FaUserCheck,
   FaExclamationCircle,
   FaClipboardList,
-  FaBriefcase,
   FaChartLine,
-  FaHistory,
   FaRegBuilding,
   FaInfoCircle,
 } from 'react-icons/fa';
+import axiosInstance from '../auth/AxiosInstance';
 
 const AttendancePanel = () => {
   const [status, setStatus] = useState(null);
@@ -48,8 +46,8 @@ const AttendancePanel = () => {
   const fetchStatus = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/attendance/status',
+      const res = await axiosInstance.post(
+        '/attendance/status',
         { user_id: userId }
       );
       setStatus(res.data.attendanceStatus);
@@ -115,8 +113,8 @@ const AttendancePanel = () => {
 
     setActionLoading(true);
     try {
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/check-in',
+      await axiosInstance.post(
+        '/check-in',
         {
           user_id: userId,
           currentLatitude: location.latitude,
@@ -136,8 +134,8 @@ const AttendancePanel = () => {
   const handleCheckOut = async () => {
     setActionLoading(true);
     try {
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/attendance/check-out',
+      await axiosInstance.post(
+        '/attendance/check-out',
         {
           user_id: userId,
           report: workReport,

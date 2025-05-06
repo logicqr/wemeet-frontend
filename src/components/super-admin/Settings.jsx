@@ -14,7 +14,8 @@ import {
   FaBuilding,
   FaArrowRight,
 } from 'react-icons/fa';
-import axios from 'axios';
+import axiosInstance from '../auth/AxiosInstance';
+
 
 export default function LocationSettingsForm() {
   // Set company ID as a constant
@@ -126,8 +127,8 @@ export default function LocationSettingsForm() {
 
       console.log('Submitting data:', submissionData);
 
-      const response = await axios.put(
-        'https://wemeet-backend-latest.onrender.com/api/settings',
+      const response = await axiosInstance.put(
+        '/settings',
         {
           ...submissionData,
           // Convert to number only for the API call

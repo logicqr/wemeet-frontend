@@ -18,6 +18,8 @@ import AttendancePanel from './components/commonSections/AttendancePanel';
 import MyMeeting from './components/Common1/MyMeeting';
 import Settings from './components/super-admin/Settings';
 import ModernEmployeeReport from './components/super-admin/EmployeeReport';
+import AllUsers from './components/super-admin/AllUsers'
+import AddPlans from './components/saas-admin/AddPlans';
 export default function App() {
   const location = useLocation();
 
@@ -42,11 +44,13 @@ export default function App() {
         <Route path="/leave-request" element={<LeaveRequest />} />
         <Route path="/admin-leave-request" element={<AdminLeaveRequests />} />
         <Route path="/my-meetings" element={<MyMeeting />} />
-        <Route path="/Settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/reports" element={<ModernEmployeeReport />} />
         <Route path="/my-leave" element={<LeaveRequest />} />
         <Route path="/leave-management" element={<AdminLeaveRequests />} />
         <Route path="/my-attendance" element={<AttendancePanel />} />
+        <Route path="/all-users" element={<AllUsers/>} />
+        <Route path="/add-plans" element={<AddPlans/>} />
       </Routes>
     </>
   );

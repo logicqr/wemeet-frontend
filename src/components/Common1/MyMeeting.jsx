@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
   FiCalendar,
   FiClock,
   FiUsers,
-  FiMapPin,
-  FiChevronRight,
   FiRefreshCw,
   FiArrowUp,
   FiArchive,
-  FiFilter,
   FiVideo,
 } from 'react-icons/fi';
+import axiosInstance from '../auth/AxiosInstance';
 
 function MyMeeting() {
   const [meetings, setMeetings] = useState([]);
@@ -28,8 +25,8 @@ function MyMeeting() {
     try {
       // Assuming userId is available from your auth context or similar
       const user_id = '42ddbf40-32f0-4e90-9957-56bf33b2a0e7'; // Replace with actual user ID from your auth system
-      const response = await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/my-meetings',
+      const response = await axiosInstance.post(
+        '/my-meetings',
         { user_id }
       );
       setMeetings(response.data);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from './AxiosInstance';
 
 export default function Register() {
   const initialFormState = {
@@ -107,8 +107,8 @@ export default function Register() {
       };
 
       // Make API call
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/register',
+      await axiosInstance.post(
+        '/register',
         dataToSend
       );
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
   FiUser,
   FiMail,
@@ -16,6 +15,7 @@ import {
   FiHome,
   FiGrid,
 } from 'react-icons/fi';
+import axiosInstance from '../auth/AxiosInstance';
 
 export default function AddStaff() {
   // Constants for user roles and permissions
@@ -84,8 +84,8 @@ export default function AddStaff() {
         company_id: companyId,
       };
 
-      const res = await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/add-user',
+      const res = await axiosInstance.post(
+        '/add-user',
         dataToSubmit
       );
 

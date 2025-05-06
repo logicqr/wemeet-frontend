@@ -8,7 +8,8 @@ import {
   FaPlusCircle,
   FaTimes,
 } from 'react-icons/fa';
-import axios from 'axios';
+import axiosInstance from '../auth/AxiosInstance';
+
 
 export default function MeetingCreationPage() {
   const [title, setTitle] = useState('');
@@ -48,8 +49,8 @@ export default function MeetingCreationPage() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/all-users',
+      const response = await axiosInstance.post(
+        '/all-users',
         { company_id }
       );
       const usersWithoutSelf = response.data.filter(
@@ -83,8 +84,8 @@ export default function MeetingCreationPage() {
         ],
       };
 
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/create-meeting',
+      await axiosInstance.post(
+        '/create-meeting',
         meetingData
       );
 

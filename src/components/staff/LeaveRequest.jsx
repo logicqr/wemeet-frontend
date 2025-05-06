@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../auth/AxiosInstance';
 
 export default function LeaveRequest() {
   // Constants
@@ -53,8 +53,8 @@ export default function LeaveRequest() {
     setHistoryError('');
 
     try {
-      const response = await axios.get(
-        `https://wemeet-backend-latest.onrender.com/api/leave-request/${USER_ID}`
+      const response = await axiosInstance.get(
+        `/leave-request/${USER_ID}`
       );
 
       if (response.data && response.data.data) {
@@ -113,8 +113,8 @@ export default function LeaveRequest() {
       };
 
       // Make API call
-      await axios.post(
-        'https://wemeet-backend-latest.onrender.com/api/leave-request',
+      await axiosInstance.post(
+        '/leave-request',
         leaveData
       );
 
